@@ -9,6 +9,11 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  //
+  devServer: {
+    port: 3000,
+  },
+  //
   module: {
     rules: [
       {
@@ -23,10 +28,12 @@ module.exports = {
       },
     ],
   },
+  //
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
       template: 'public/index.html',
+      title: 'Excalibur JS',
     }),
   ],
 }
