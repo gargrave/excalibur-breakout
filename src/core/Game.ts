@@ -1,5 +1,7 @@
 import * as ex from 'excalibur'
 
+import { globals } from './globals'
+
 const Keys = ex.Input.Keys
 
 export default class Game extends ex.Engine {
@@ -7,6 +9,8 @@ export default class Game extends ex.Engine {
 
   constructor(options: ex.EngineOptions) {
     super(options)
+
+    globals.game = this
 
     this._paused = false
   }

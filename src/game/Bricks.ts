@@ -21,7 +21,7 @@ class Brick extends Entity {
 }
 
 export default class Bricks extends Entity {
-  init(game: Game) {
+  init(game: Game, scene: ex.Scene) {
     const brickWidth = game.drawWidth / cols - padding - padding / cols
     const bricks: ex.Actor[] = []
 
@@ -40,7 +40,7 @@ export default class Bricks extends Entity {
     }
 
     bricks.forEach(brick => {
-      game.add(brick)
+      scene.add(brick)
     })
   }
 }
