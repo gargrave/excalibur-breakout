@@ -9,7 +9,7 @@ export const config: GameConfig = {
     bricks: 'bricks',
     player: 'player',
   },
-  entryScene: 'game',
+  entryScene: 'title',
   scenes: {
     game: GameScene,
     title: TitleScene,

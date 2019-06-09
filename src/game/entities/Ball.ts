@@ -62,6 +62,9 @@ export default class Ball extends Entity {
   }
 
   handleExitViewPort() {
+    if (this.isKilled()) {
+      return
+    }
     this.vel.setTo(0, 0)
     console.warn('TODO: Handle lose conditions')
   }

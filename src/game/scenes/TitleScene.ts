@@ -5,6 +5,8 @@ import { Game } from '../../core'
 const Keys = ex.Input.Keys
 
 export default class TitleScene extends ex.Scene {
+  // TODO: show a title GUI here
+
   update(game: Game) {
     const k = game.input.keyboard
 

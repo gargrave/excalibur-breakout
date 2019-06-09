@@ -2,8 +2,6 @@ import * as ex from 'excalibur'
 
 import { globals } from './globals'
 
-const Keys = ex.Input.Keys
-
 export default class Game extends ex.Engine {
   private _paused: boolean
 
@@ -13,13 +11,6 @@ export default class Game extends ex.Engine {
     globals.game = this
 
     this._paused = false
-  }
-
-  onPreUpdate(engine: ex.Engine) {
-    const k = engine.input.keyboard
-    if (k.wasPressed(Keys.Esc)) {
-      this.togglePause()
-    }
   }
 
   changeScene(nextScene: string) {

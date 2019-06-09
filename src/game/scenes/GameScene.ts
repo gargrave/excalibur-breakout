@@ -54,11 +54,16 @@ export default class GameScene extends ex.Scene {
     }
   }
 
-  // TODO: move pause here
   onPreUpdate(game: Game) {
     const k = game.input.keyboard
-    if (k.wasPressed(Keys.Space)) {
+
+    if (k.wasPressed(Keys.Space) && game.paused) {
       game.changeScene('title')
+      return
+    }
+
+    if (k.wasPressed(Keys.Esc)) {
+      game.togglePause()
     }
   }
 }
