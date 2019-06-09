@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { Entity, globals } from '../core'
+import { Entity, globals } from '../../core'
 
 const size = 24
 const speed = 160

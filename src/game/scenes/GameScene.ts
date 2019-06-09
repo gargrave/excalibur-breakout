@@ -2,9 +2,9 @@ import * as ex from 'excalibur'
 
 import { Game } from 'core'
 
-import Ball from '../Ball'
-import Bricks from '../Bricks'
-import Player from '../Player'
+import Ball from '../entities/Ball'
+import Bricks from '../entities/Bricks'
+import Player from '../entities/Player'
 
 export default class GameScene extends ex.Scene {
   constructor(game: Game) {

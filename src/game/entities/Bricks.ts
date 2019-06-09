@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { Entity, Game, globals } from '../core'
+import { Entity, Game, globals } from '../../core'
 
 const padding = 20
 const xoffset = 65

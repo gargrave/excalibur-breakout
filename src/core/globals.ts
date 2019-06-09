@@ -6,6 +6,16 @@ type KeyedMap = {
   [key: string]: string
 }
 
+export type GameConfig = {
+  collisionGroups: {
+    [key: string]: string
+  }
+  entryScene: string
+  scenes: {
+    [key: string]: any
+  }
+}
+
 let collGroups: KeyedMap
 let game: Game
 
