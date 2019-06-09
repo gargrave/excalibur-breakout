@@ -8,11 +8,8 @@ import Player from '../entities/Player'
 
 const Keys = ex.Input.Keys
 
+// TODO: add a pause UI/overlay
 export default class GameScene extends ex.Scene {
-  constructor(game: Game) {
-    super(game)
-  }
-
   onActivate(prev, next) {
     super.onActivate(prev, next)
 
@@ -23,6 +20,7 @@ export default class GameScene extends ex.Scene {
 
     bricks.init(globals.game, this)
 
+    // TODO: add a log showing actors added (i.e. total count)
     for (const e of entities) {
       this.add(e)
     }
@@ -41,12 +39,13 @@ export default class GameScene extends ex.Scene {
     super.onDeactivate(prev, next)
 
     // TODO: move this behavior to a base class
+    // TODO: add a log showing actors disposed
     for (const a of this.actors) {
-      this.remove(a)
+      a.kill()
     }
 
     if (process.env.NODE_ENV === 'development') {
-      console.info('Clearing entities from window !')
+      console.info('Clearing entities from window!')
       const w = window as any
       delete w.ball
       delete w.bricks
