@@ -1,24 +1,22 @@
 import * as ex from 'excalibur'
 
-import { CollGroups } from './cg'
+import { Entity, globals } from '../core'
 
-// TODO: expose game globally
-const GAME_WIDTH = 800
-const size = 20
+const size = 24
+const speed = 160
 
-export default class Ball extends ex.Actor {
+export default class Ball extends Entity {
   constructor() {
     super()
+
     this.color = ex.Color.Red
     this.height = size
     this.width = size
     this.pos.setTo(100, 300)
-    this.vel.setTo(125, 125)
+    this.vel.setTo(speed, speed)
 
     this.body.collider.type = ex.CollisionType.Passive
-    this.body.collider.group = ex.CollisionGroupManager.groupByName(
-      CollGroups.ball,
-    )
+    this.setCollisionGroup(globals.collGroups.ball)
 
     this.on('precollision', this.handlePreCollision)
     this.on('exitviewport', this.handleExitViewPort)
@@ -40,7 +38,7 @@ export default class Ball extends ex.Actor {
 
     if (pos.x < half) {
       vel.x *= -1
-    } else if (pos.x + half > GAME_WIDTH) {
+    } else if (pos.x + half > this.game.drawWidth) {
       vel.x *= -1
     }
 
@@ -51,7 +49,7 @@ export default class Ball extends ex.Actor {
 
   handlePreCollision(e: ex.Events.PreCollisionEvent) {
     const { name } = e.other.body.collider.group
-    if (name === CollGroups.bricks) {
+    if (name === globals.collGroups.bricks) {
       e.other.kill()
     }
 
@@ -64,6 +62,7 @@ export default class Ball extends ex.Actor {
   }
 
   handleExitViewPort() {
-    alert('you lose!')
+    this.vel.setTo(0, 0)
+    console.warn('TODO: Handle lose conditions')
   }
 }

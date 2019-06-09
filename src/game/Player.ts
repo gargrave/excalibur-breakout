@@ -1,24 +1,34 @@
 import * as ex from 'excalibur'
 
-import { CollGroups } from './cg'
+import { Entity, globals } from '../core'
 
 const Keys = ex.Input.Keys
-const DEFAULT_SPEED = 25
 
-export default class Player extends ex.Actor {
-  constructor(private _speed = DEFAULT_SPEED) {
+// const DEFAULT_SPEED = 25
+const DEFAULT_SPEED = 450
+
+export default class Player extends Entity {
+  _speed: number
+
+  constructor() {
     super()
+
     this.color = ex.Color.Chartreuse
     this.pos.setTo(320, 600 - 40)
     this.width = 176
-    this.height = 24
+    this.height = 32
     this.body.collider.type = ex.CollisionType.Fixed
-    this.body.collider.group = ex.CollisionGroupManager.groupByName(
-      CollGroups.player,
-    )
+    this.setCollisionGroup(globals.collGroups.player)
+
+    this._speed = DEFAULT_SPEED
   }
 
   update(engine: ex.Engine, dt: number) {
+    if (this.game.paused) {
+      return
+    }
+    super.update(engine, dt)
+
     const k = engine.input.keyboard
     const vel = { x: 0 }
 
@@ -28,9 +38,8 @@ export default class Player extends ex.Actor {
     if (k.isHeld(Keys.D) || k.isHeld(Keys.Right)) {
       vel.x += 1
     }
-    this.vel.setTo(vel.x * this.speed * dt, 0)
-
-    super.update(engine, dt)
+    // this.vel.setTo(vel.x * this.speed * dt, 0)
+    this.vel.setTo(vel.x * this.speed, 0)
   }
 
   get speed() {

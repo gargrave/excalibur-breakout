@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { CollGroups } from './cg'
+import { Entity, Game, globals } from '../core'
 
 const padding = 20
 const xoffset = 65
@@ -8,21 +8,20 @@ const yoffset = 20
 const rows = 3
 const cols = 5
 
-const brickColor = [ex.Color.Violet, ex.Color.Orange, ex.Color.Yellow]
+const brickColor = [ex.Color.Red, ex.Color.Orange, ex.Color.Yellow]
 const brickHeight = 30
 
-class Brick extends ex.Actor {
+class Brick extends Entity {
   constructor(x, y, w, h, color) {
     super(x, y, w, h, color)
+
     this.body.collider.type = ex.CollisionType.Active
-    this.body.collider.group = ex.CollisionGroupManager.groupByName(
-      CollGroups.bricks,
-    )
+    this.setCollisionGroup(globals.collGroups.bricks)
   }
 }
 
-export default class Bricks extends ex.Actor {
-  init(game: ex.Engine) {
+export default class Bricks extends Entity {
+  init(game: Game) {
     const brickWidth = game.drawWidth / cols - padding - padding / cols
     const bricks: ex.Actor[] = []
 

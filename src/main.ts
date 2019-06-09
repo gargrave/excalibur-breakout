@@ -1,16 +1,21 @@
 import * as ex from 'excalibur'
 
-import { initCollisionGroups } from './cg'
-initCollisionGroups()
+import config from './config'
 
-import Ball from './ball'
-import Bricks from './bricks'
-import Player from './player'
+import { Game, globals } from './core'
 
-const game: ex.Engine = new ex.Engine({
+import Ball from './game/Ball'
+import Bricks from './game/Bricks'
+import Player from './game/Player'
+
+const game = new Game({
   width: 800,
   height: 600,
 })
+globals.game = game
+globals.collGroups = config.collisionGroups
+game.backgroundColor = ex.Color.fromHex('#454545')
+// game.isDebug = true
 
 const ball = new Ball()
 const player = new Player()
