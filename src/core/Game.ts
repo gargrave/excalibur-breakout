@@ -22,6 +22,11 @@ export default class Game extends ex.Engine {
     }
   }
 
+  changeScene(nextScene: string) {
+    this.goToScene(nextScene)
+    this._paused = false
+  }
+
   togglePause() {
     this._paused = !this._paused
   }

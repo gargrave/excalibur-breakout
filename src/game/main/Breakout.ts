@@ -17,7 +17,7 @@ export default class Breakout extends Game {
     this.backgroundColor = ex.Color.fromHex('#454545')
 
     this.setupScenes()
-    this.goToScene('game')
+    this.changeScene(config.entryScene)
   }
 
   setupScenes() {

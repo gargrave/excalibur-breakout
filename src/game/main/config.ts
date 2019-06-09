@@ -1,6 +1,7 @@
 import { GameConfig } from 'core/globals'
 
 import GameScene from '../scenes/GameScene'
+import TitleScene from '../scenes/TitleScene'
 
 export const config: GameConfig = {
   collisionGroups: {
@@ -8,8 +9,9 @@ export const config: GameConfig = {
     bricks: 'bricks',
     player: 'player',
   },
-  entryScene: 'title',
+  entryScene: 'game',
   scenes: {
     game: GameScene,
+    title: TitleScene,
   },
 }
