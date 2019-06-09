@@ -14,6 +14,10 @@ module.exports = {
     port: 3000,
   },
   //
+  resolve: {
+    extensions: ['.js', '.ts'],
+  },
+  //
   module: {
     rules: [
       {
