@@ -1,6 +1,8 @@
 import * as ex from 'excalibur'
 
 import { globals } from './globals'
+import { isDev } from './utils'
+import Log from './Log'
 
 export default class Game extends ex.Engine {
   private _paused: boolean
@@ -11,6 +13,12 @@ export default class Game extends ex.Engine {
     globals.game = this
 
     this._paused = false
+
+    if (isDev()) {
+      Log.info('Adding `globals` to window for dev env')
+      const w = window as any
+      w.globals = globals
+    }
   }
 
   changeScene(nextScene: string) {

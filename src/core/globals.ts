@@ -1,6 +1,9 @@
 import * as ex from 'excalibur'
 
 import Game from './Game'
+import Log from './Log'
+
+import { isDev } from './utils'
 
 type KeyedMap = {
   [key: string]: string
@@ -18,6 +21,7 @@ export type GameConfig = {
 
 let collGroups: KeyedMap
 let game: Game
+let loggingEnabled: boolean = isDev()
 
 export const globals = {
   get game() {
@@ -36,5 +40,18 @@ export const globals = {
 
   get collGroups() {
     return collGroups
+  },
+
+  set loggingEnabled(val: boolean) {
+    loggingEnabled = isDev() && val
+    if (loggingEnabled) {
+      Log.info('Logging has been enabled for dev env')
+    } else {
+      console.log('Logging disabled...')
+    }
+  },
+
+  get loggingEnabled() {
+    return loggingEnabled
   },
 }

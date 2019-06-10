@@ -12,8 +12,8 @@ const brickColor = [ex.Color.Red, ex.Color.Orange, ex.Color.Yellow]
 const brickHeight = 30
 
 class Brick extends Entity {
-  constructor(x, y, w, h, color) {
-    super(x, y, w, h, color)
+  constructor(x, y, width, height, color) {
+    super({ x, y, width, height, color })
 
     this.body.collider.type = ex.CollisionType.Active
     this.setCollisionGroup(globals.collGroups.bricks)

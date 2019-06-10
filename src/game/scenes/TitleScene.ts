@@ -1,7 +1,6 @@
 import * as ex from 'excalibur'
 
-import { globals } from '../../core'
-import { Game } from '../../core'
+import { Game, Scene, globals } from '../../core'
 
 const Keys = ex.Input.Keys
 
@@ -32,7 +31,11 @@ const startLabel = () => {
   return label
 }
 
-export default class TitleScene extends ex.Scene {
+export default class TitleScene extends Scene {
+  constructor(game: Game) {
+    super(game, 'Title Scene')
+  }
+
   onActivate(a, b) {
     super.onActivate(a, b)
 
@@ -42,13 +45,6 @@ export default class TitleScene extends ex.Scene {
     }
     this.add(titleLabel())
     this.add(startLabel())
-  }
-
-  onDeactivate(a, b) {
-    super.onDeactivate(a, b)
-
-    const killActor = a => a.kill()
-    this.actors.forEach(killActor)
   }
 
   onPreUpdate(game: Game) {

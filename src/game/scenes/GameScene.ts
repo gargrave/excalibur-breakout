@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { Game, globals } from '../../core'
+import { Game, Log, Scene, globals } from '../../core'
 
 import Ball from '../entities/Ball'
 import Bricks from '../entities/Bricks'
@@ -9,7 +9,11 @@ import Player from '../entities/Player'
 const Keys = ex.Input.Keys
 
 // TODO: add a pause UI/overlay
-export default class GameScene extends ex.Scene {
+export default class GameScene extends Scene {
+  constructor(game: Game) {
+    super(game, 'Game Scene')
+  }
+
   onActivate(prev, next) {
     super.onActivate(prev, next)
 
@@ -27,7 +31,7 @@ export default class GameScene extends ex.Scene {
 
     // TODO: add a field to Entity to conditionally expose this
     if (process.env.NODE_ENV === 'development') {
-      console.info('Adding entities to window for development mode!')
+      Log.info('Adding scene entities to window for development mode!')
       const w = window as any
       w.ball = ball
       w.bricks = bricks
@@ -38,14 +42,8 @@ export default class GameScene extends ex.Scene {
   onDeactivate(prev, next) {
     super.onDeactivate(prev, next)
 
-    // TODO: move this behavior to a base class
-    // TODO: add a log showing actors disposed
-    for (const a of this.actors) {
-      a.kill()
-    }
-
     if (process.env.NODE_ENV === 'development') {
-      console.info('Clearing entities from window!')
+      Log.info('Removing scene entities from window object')
       const w = window as any
       delete w.ball
       delete w.bricks
