@@ -64,7 +64,7 @@ export default class GameScene extends Scene {
       const h = globals.game.drawHeight
 
       // draw the overlay
-      ctx.fillStyle = 'rgba(0, 0, 0, .8)'
+      ctx.fillStyle = 'rgba(0, 0, 0, .85)'
       ctx.rect(0, 0, w, h)
       ctx.fill()
 

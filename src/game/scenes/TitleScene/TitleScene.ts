@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { Game, Scene, globals } from '../../core'
+import { Game, Scene, globals } from '../../../core'
 
 const Keys = ex.Input.Keys
 

@@ -33,7 +33,7 @@ const labels = () => {
   const quitLabel = new ex.Label({
     ...defaultConfig,
     color: ex.Color.White,
-    fontSize: 18,
+    fontSize: 20,
     text: 'Or press Spacebar to quit.',
   })
   quitLabel.pos.setTo(w / 2, h - quitLabel.fontSize)
