@@ -19,13 +19,13 @@ const titleLabel = () => {
 }
 
 const startLabel = () => {
-  const a = titleLabel()
+  const title = titleLabel()
   const label = new ex.Label()
   label.fontFamily = 'Sans-Serif'
   label.fontSize = 32
   label.color = ex.Color.White
   label.fontUnit = ex.FontUnit.Px
-  label.pos.setTo(center.x, a.pos.y + a.fontSize)
+  label.pos.setTo(center.x, title.pos.y + title.fontSize)
   label.textAlign = ex.TextAlign.Center
   label.text = 'Press Spacebar to start!'
   return label

@@ -1,17 +1,22 @@
 import * as ex from 'excalibur'
 
-import { Game, Log, Scene, globals } from '../../core'
+import { Game, Log, Scene, globals } from '../../../core'
 
-import Ball from '../entities/Ball'
-import Bricks from '../entities/Bricks'
-import Player from '../entities/Player'
+import Ball from '../../entities/Ball'
+import Bricks from '../../entities/Bricks'
+import Player from '../../entities/Player'
+
+import labels from './labels'
 
 const Keys = ex.Input.Keys
 
-// TODO: add a pause UI/overlay
 export default class GameScene extends Scene {
+  private labels: { [key: string]: ex.Label }
+
   constructor(game: Game) {
     super(game, 'Game Scene')
+
+    this.labels = labels()
   }
 
   onActivate(prev, next) {
@@ -48,6 +53,23 @@ export default class GameScene extends Scene {
       delete w.ball
       delete w.bricks
       delete w.player
+    }
+  }
+
+  draw(ctx: CanvasRenderingContext2D, dt: number) {
+    super.draw(ctx, dt)
+
+    if (globals.game.paused) {
+      const w = globals.game.drawWidth
+      const h = globals.game.drawHeight
+
+      // draw the overlay
+      ctx.fillStyle = 'rgba(0, 0, 0, .8)'
+      ctx.rect(0, 0, w, h)
+      ctx.fill()
+
+      // draw the pause GUI/labels
+      Object.values(this.labels).forEach(l => l.draw(ctx, dt))
     }
   }
 
