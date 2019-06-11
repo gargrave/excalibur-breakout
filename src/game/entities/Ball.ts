@@ -7,19 +7,21 @@ const speed = 160
 
 export default class Ball extends Entity {
   constructor() {
-    super()
+    super({
+      color: ex.Color.Red,
+      height: size,
+      width: size,
+      x: 100,
+      y: 300,
+    })
 
-    this.color = ex.Color.Red
-    this.height = size
-    this.width = size
-    this.pos.setTo(100, 300)
     this.vel.setTo(speed, speed)
 
     this.body.collider.type = ex.CollisionType.Passive
     this.collisionGroup = globals.collGroups.ball
 
-    this.on('precollision', this.handlePreCollision)
-    this.on('exitviewport', this.handleExitViewPort)
+    this.on('precollision', this.onPreCollision)
+    this.on('exitviewport', this.onExitViewPort)
   }
 
   draw(ctx: CanvasRenderingContext2D, dt: number) {
@@ -47,7 +49,7 @@ export default class Ball extends Entity {
     }
   }
 
-  handlePreCollision(e: ex.Events.PreCollisionEvent) {
+  onPreCollision(e: ex.Events.PreCollisionEvent) {
     const { name } = e.other.body.collider.group
     if (name === globals.collGroups.bricks) {
       e.other.kill()
@@ -61,7 +63,7 @@ export default class Ball extends Entity {
     }
   }
 
-  handleExitViewPort() {
+  onExitViewPort() {
     if (this.isKilled()) {
       return
     }
