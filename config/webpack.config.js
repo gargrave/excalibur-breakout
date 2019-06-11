@@ -3,15 +3,10 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
   entry: './src/main.ts',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-  //
-  devServer: {
-    port: 3000,
+    path: path.resolve(__dirname, '../dist'),
   },
   //
   resolve: {
@@ -37,7 +32,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: 'public/index.html',
-      title: 'Excalibur JS',
+      title: 'Better Breakout',
     }),
   ],
 }
