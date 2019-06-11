@@ -6,11 +6,11 @@ import { Game, globals } from '../../core'
 
 export default class Breakout extends Game {
   constructor() {
-    const options: ex.EngineOptions = {
+    const engineOptions: ex.EngineOptions = {
       height: 600,
       width: 800,
     }
-    super(options)
+    super(engineOptions, config)
 
     globals.collGroups = config.collisionGroups
 

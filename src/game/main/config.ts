@@ -10,6 +10,9 @@ export const config: GameConfig = {
     player: 'player',
   },
   entryScene: 'title',
+  options: {
+    pauseOnBlur: true,
+  },
   scenes: {
     game: GameScene,
     title: TitleScene,
