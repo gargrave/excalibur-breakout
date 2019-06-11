@@ -16,7 +16,7 @@ export default class Ball extends Entity {
     this.vel.setTo(speed, speed)
 
     this.body.collider.type = ex.CollisionType.Passive
-    this.setCollisionGroup(globals.collGroups.ball)
+    this.collisionGroup = globals.collGroups.ball
 
     this.on('precollision', this.handlePreCollision)
     this.on('exitviewport', this.handleExitViewPort)

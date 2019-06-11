@@ -28,7 +28,7 @@ export default class Entity extends ex.Actor {
     super.update(engine, dt)
   }
 
-  setCollisionGroup(group: string) {
+  set collisionGroup(group: string) {
     this.body.collider.group = ex.CollisionGroupManager.groupByName(group)
   }
 

@@ -17,7 +17,7 @@ export default class Player extends Entity {
     this.width = 176
     this.height = 32
     this.body.collider.type = ex.CollisionType.Fixed
-    this.setCollisionGroup(globals.collGroups.player)
+    this.collisionGroup = globals.collGroups.player
   }
 
   update(game: ex.Engine, dt: number) {
@@ -38,7 +38,7 @@ export default class Player extends Entity {
     this.vel.setTo(vel.x * this.speed, 0)
   }
 
-  onPostUpdate(game: ex.Engine, dt: number) {
+  onPostUpdate(game: ex.Engine) {
     if (this.right < 0) {
       this.pos.setTo(game.drawWidth + this.width * 0.5 - 1, this.pos.y)
     } else if (this.left > game.drawWidth) {

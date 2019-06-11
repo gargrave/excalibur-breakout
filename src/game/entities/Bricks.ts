@@ -16,7 +16,7 @@ class Brick extends Entity {
     super({ x, y, width, height, color })
 
     this.body.collider.type = ex.CollisionType.Active
-    this.setCollisionGroup(globals.collGroups.bricks)
+    this.collisionGroup = globals.collGroups.bricks
   }
 }
 
