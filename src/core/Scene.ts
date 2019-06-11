@@ -1,6 +1,7 @@
 import * as ex from 'excalibur'
 
-import { Game, Log, isDev } from '../core'
+import { Game, Log } from '../core'
+import { isDev } from '../core/utils'
 
 export default class Scene extends ex.Scene {
   protected name: string

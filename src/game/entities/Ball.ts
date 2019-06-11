@@ -1,9 +1,17 @@
 import * as ex from 'excalibur'
 
 import { Entity, globals } from '../../core'
+import { clamp } from '../../core/utils'
 
 const size = 24
 const speed = 160
+
+const getStartX = () => {
+  const min = 100
+  const max = globals.game.drawWidth - 100
+  const rand = Math.floor(Math.random() * globals.game.drawWidth)
+  return clamp(min, max)(rand)
+}
 
 export default class Ball extends Entity {
   constructor() {
@@ -11,11 +19,12 @@ export default class Ball extends Entity {
       color: ex.Color.Red,
       height: size,
       width: size,
-      x: 100,
-      y: 300,
     })
 
-    this.vel.setTo(speed, speed)
+    const x = getStartX()
+    const midX = globals.game.halfDrawWidth
+    this.pos.setTo(x, 250)
+    this.vel.setTo(x > midX ? -speed : speed, speed)
 
     this.body.collider.type = ex.CollisionType.Passive
     this.collisionGroup = globals.collGroups.ball
