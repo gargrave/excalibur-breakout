@@ -38,7 +38,7 @@ export default class Ball extends Entity {
 
     if (pos.x < half) {
       vel.x *= -1
-    } else if (pos.x + half > this.game.drawWidth) {
+    } else if (pos.x + half > globals.game.drawWidth) {
       vel.x *= -1
     }
 

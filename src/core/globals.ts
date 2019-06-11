@@ -1,24 +1,12 @@
 import * as ex from 'excalibur'
 
 import { isDev } from './utils'
-import { GameOptions } from './types'
 
 import Game from './Game'
 import Log from './Log'
 
 type KeyedMap = {
   [key: string]: string
-}
-
-export type GameConfig = {
-  collisionGroups: {
-    [key: string]: string
-  }
-  entryScene: string
-  options?: GameOptions
-  scenes: {
-    [key: string]: any
-  }
 }
 
 let collGroups: KeyedMap

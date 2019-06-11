@@ -1,7 +1,7 @@
 import * as ex from 'excalibur'
 
-import { globals, GameConfig } from './globals'
-import { GameOptions } from './types'
+import { globals } from './globals'
+import { GameOptions, GameConfig } from './types'
 import { isDev } from './utils'
 
 import Log from './Log'

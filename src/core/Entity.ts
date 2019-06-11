@@ -1,7 +1,6 @@
 import * as ex from 'excalibur'
 
 import { globals } from './globals'
-import Game from './Game'
 
 type ActorConfig = {
   x?: number
@@ -12,8 +11,6 @@ type ActorConfig = {
 }
 
 export default class Entity extends ex.Actor {
-  protected game: Game
-
   constructor({
     x = 0,
     y = 0,
@@ -22,12 +19,10 @@ export default class Entity extends ex.Actor {
     color = ex.Color.White,
   }: ActorConfig = {}) {
     super(x, y, width, height, color)
-
-    this.game = globals.game
   }
 
   update(engine, dt) {
-    if (this.game.paused) {
+    if (globals.game.paused) {
       return
     }
     super.update(engine, dt)
@@ -35,5 +30,13 @@ export default class Entity extends ex.Actor {
 
   setCollisionGroup(group: string) {
     this.body.collider.group = ex.CollisionGroupManager.groupByName(group)
+  }
+
+  get left() {
+    return this.body.collider.bounds.left
+  }
+
+  get right() {
+    return this.body.collider.bounds.right
   }
 }

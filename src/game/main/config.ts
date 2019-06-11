@@ -1,4 +1,4 @@
-import { GameConfig } from 'core/globals'
+import { GameConfig } from '../../core/types'
 
 import GameScene from '../scenes/GameScene'
 import TitleScene from '../scenes/TitleScene'
