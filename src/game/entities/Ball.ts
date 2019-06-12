@@ -1,7 +1,7 @@
 import * as ex from 'excalibur'
 
-import { Entity, Score, globals, Log } from '../../core'
-import { clamp } from '../../core/utils'
+import { Entity, Score, globals } from '@core'
+import { clamp } from '@core/utils'
 
 const size = 24
 const speed = 160

@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { Game, Log, Scene, globals, Score } from '../../../core'
+import { Game, Log, Scene, globals, Score } from '@core'
 
 import Ball from '../../entities/Ball'
 import Bricks from '../../entities/Bricks'

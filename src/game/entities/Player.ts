@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { Entity, globals } from '../../core'
+import { Entity, globals } from '@core'
 
 const Keys = ex.Input.Keys
 

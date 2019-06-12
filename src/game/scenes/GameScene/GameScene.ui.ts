@@ -1,7 +1,7 @@
 import * as ex from 'excalibur'
 import { LabelArgs } from 'excalibur/dist/Label'
 
-import { Score, globals } from '../../../core'
+import { Score, globals } from '@core'
 
 const defaultConfig: LabelArgs = {
   color: ex.Color.White,

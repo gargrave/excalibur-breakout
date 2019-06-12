@@ -2,7 +2,7 @@ import * as ex from 'excalibur'
 
 import { config } from './config'
 
-import { Game, globals } from '../../core'
+import { Game, globals } from '@core'
 
 export default class Breakout extends Game {
   constructor() {
