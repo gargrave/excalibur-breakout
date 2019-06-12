@@ -3,8 +3,9 @@ import * as ex from 'excalibur'
 import { Entity, Score, globals } from '@core'
 import { clamp } from '@core/utils'
 
-const size = 24
-const speed = 160
+const SIZE = 24
+const BASE_SPEED = 160
+const COLLISIONS_SPEED_INC = 10
 
 const getStartX = () => {
   const min = 100
@@ -14,17 +15,21 @@ const getStartX = () => {
 }
 
 export default class Ball extends Entity {
+  private currentSpeed = BASE_SPEED
+  private collisions = 0
+
   constructor() {
     super({
       color: ex.Color.Red,
-      height: size,
-      width: size,
+      height: SIZE,
+      width: SIZE,
     })
 
     const x = getStartX()
     const midX = globals.game.halfDrawWidth
+    const spd = this.currentSpeed
     this.pos.setTo(x, 250)
-    this.vel.setTo(x > midX ? -speed : speed, speed)
+    this.vel.setTo(x > midX ? -spd : spd, spd)
 
     this.body.collider.type = ex.CollisionType.Passive
     this.collisionGroup = globals.collGroups.ball
@@ -38,14 +43,14 @@ export default class Ball extends Entity {
 
     ctx.fillStyle = color.toString()
     ctx.beginPath()
-    ctx.arc(pos.x, pos.y, size / 2, 0, Math.PI * 2)
+    ctx.arc(pos.x, pos.y, SIZE / 2, 0, Math.PI * 2)
     ctx.closePath()
     ctx.fill()
   }
 
   onPostUpdate() {
     const { pos, vel } = this
-    const half = size / 2
+    const half = SIZE / 2
 
     if (pos.x < half) {
       vel.x *= -1
@@ -61,9 +66,7 @@ export default class Ball extends Entity {
   onPreCollision(e: ex.Events.PreCollisionEvent) {
     const { name } = e.other.body.collider.group
     if (name === globals.collGroups.bricks) {
-      // TODO: build a more robust way of handling scoring
-      Score.add(100)
-      e.other.kill()
+      this.handleBrickCollision(e.other)
     }
 
     const intersection = e.intersection.normalize()
@@ -80,5 +83,21 @@ export default class Ball extends Entity {
     }
     this.vel.setTo(0, 0)
     console.warn('TODO: Handle lose conditions')
+  }
+
+  handleBrickCollision(brick: ex.Actor) {
+    // TODO: build a more robust way of handling scoring
+    brick.kill()
+    this.incrementSpeed()
+    Score.add(100)
+  }
+
+  incrementSpeed() {
+    this.collisions += 1
+    this.currentSpeed = BASE_SPEED + this.collisions * COLLISIONS_SPEED_INC
+    this.vel.setTo(
+      this.currentSpeed * Math.sign(this.vel.x),
+      this.currentSpeed * Math.sign(this.vel.y),
+    )
   }
 }
