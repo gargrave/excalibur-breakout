@@ -1,10 +1,8 @@
 import * as ex from 'excalibur'
 
-import { globals } from './globals'
+import { globals, Log } from '.'
 import { GameOptions, GameConfig } from './types'
 import { isDev } from './utils'
-
-import Log from './Log'
 
 export default class Game extends ex.Engine {
   private _paused: boolean

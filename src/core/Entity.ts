@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { globals } from './globals'
+import { globals } from '.'
 
 type ActorConfig = {
   x?: number

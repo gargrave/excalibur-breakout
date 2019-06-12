@@ -1,9 +1,7 @@
 import * as ex from 'excalibur'
 
+import { Game, Log } from '.'
 import { isDev } from './utils'
-
-import Game from './Game'
-import Log from './Log'
 
 type KeyedMap = {
   [key: string]: string

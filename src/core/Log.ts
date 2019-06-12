@@ -1,4 +1,4 @@
-import { globals } from './globals'
+import { globals } from '.'
 import { isDev } from './utils'
 
 const loggingEnabled = () => isDev() && globals.loggingEnabled
@@ -27,16 +27,18 @@ const infoStyle = `
 const eventHeaderLine = '+'.repeat(60)
 const eventEndLine = '^'.repeat(60)
 
-const Log = {
+const ensureArray = (val: string | string[]): string[] =>
+  Array.isArray(val) ? val : [val]
+
+export const Log = {
   info(txt: string | string[], prefix: string = '', style = infoStyle) {
     if (!loggingEnabled()) {
       return
     }
 
-    if (!Array.isArray(txt)) {
-      txt = [txt]
-    }
-    txt.forEach(str => console.info(`%c${prefix}${str}`, style))
+    const lines = ensureArray(txt)
+    const printPrefixedLine = str => console.info(`%c${prefix}${str}`, style)
+    lines.forEach(printPrefixedLine)
   },
 
   event(title: string, txt: string | string[]) {
@@ -50,5 +52,3 @@ const Log = {
     console.info(`%c${eventEndLine}`, eventDividerStyle)
   },
 }
-
-export default Log
