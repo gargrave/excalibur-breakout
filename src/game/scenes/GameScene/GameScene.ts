@@ -6,21 +6,25 @@ import Ball from '../../entities/Ball'
 import Bricks from '../../entities/Bricks'
 import Player from '../../entities/Player'
 
-import labels from './labels'
+import { pauseUI, scoreUI } from './GameScene.ui'
 
 const Keys = ex.Input.Keys
 
 export default class GameScene extends Scene {
-  private labels: { [key: string]: ex.Label }
+  private scoreUI
+  private pauseUI
 
   constructor(game: Game) {
     super(game, 'Game Scene')
 
-    this.labels = labels()
+    this.scoreUI = scoreUI()
+    this.pauseUI = pauseUI()
   }
 
   onActivate(prev, next) {
     super.onActivate(prev, next)
+
+    Log.info('TODO: reset the score at scene start')
 
     const ball = new Ball()
     const bricks = new Bricks()
@@ -59,17 +63,10 @@ export default class GameScene extends Scene {
   draw(ctx: CanvasRenderingContext2D, dt: number) {
     super.draw(ctx, dt)
 
+    this.scoreUI(ctx, dt)
+
     if (globals.game.paused) {
-      const w = globals.game.drawWidth
-      const h = globals.game.drawHeight
-
-      // draw the overlay
-      ctx.fillStyle = 'rgba(0, 0, 0, .85)'
-      ctx.rect(0, 0, w, h)
-      ctx.fill()
-
-      // draw the pause GUI/labels
-      Object.values(this.labels).forEach(l => l.draw(ctx, dt))
+      this.pauseUI(ctx, dt)
     }
   }
 
