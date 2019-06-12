@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { Entity, globals } from '../../core'
+import { Entity, Score, globals, Log } from '../../core'
 import { clamp } from '../../core/utils'
 
 const size = 24
@@ -61,6 +61,8 @@ export default class Ball extends Entity {
   onPreCollision(e: ex.Events.PreCollisionEvent) {
     const { name } = e.other.body.collider.group
     if (name === globals.collGroups.bricks) {
+      // TODO: build a more robust way of handling scoring
+      Score.add(100)
       e.other.kill()
     }
 

@@ -1,6 +1,6 @@
 import * as ex from 'excalibur'
 
-import { Game, Log, Scene, globals } from '../../../core'
+import { Game, Log, Scene, globals, Score } from '../../../core'
 
 import Ball from '../../entities/Ball'
 import Bricks from '../../entities/Bricks'
@@ -24,7 +24,7 @@ export default class GameScene extends Scene {
   onActivate(prev, next) {
     super.onActivate(prev, next)
 
-    Log.info('TODO: reset the score at scene start')
+    Score.reset()
 
     const ball = new Ball()
     const bricks = new Bricks()
@@ -64,7 +64,6 @@ export default class GameScene extends Scene {
     super.draw(ctx, dt)
 
     this.scoreUI(ctx, dt)
-
     if (globals.game.paused) {
       this.pauseUI(ctx, dt)
     }

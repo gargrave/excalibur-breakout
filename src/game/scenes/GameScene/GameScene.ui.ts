@@ -1,7 +1,7 @@
 import * as ex from 'excalibur'
 import { LabelArgs } from 'excalibur/dist/Label'
 
-import { globals } from '../../../core'
+import { Score, globals } from '../../../core'
 
 const defaultConfig: LabelArgs = {
   color: ex.Color.White,
@@ -12,7 +12,7 @@ const defaultConfig: LabelArgs = {
 }
 
 export const scoreUI = () => {
-  const scoreOffset = 6
+  let prevScore = 0
 
   const scoreLabelConfig = {
     ...defaultConfig,
@@ -20,7 +20,7 @@ export const scoreUI = () => {
     textAlign: ex.TextAlign.Left,
   }
 
-  // TODO: make a custom Label class without an "outline" option
+  // TODO: make a custom Label class with an "outline" option
   const scoreLabel = new ex.Label({
     ...scoreLabelConfig,
     pos: new ex.Vector(14, 42),
@@ -32,14 +32,24 @@ export const scoreUI = () => {
     text: '0',
   })
 
+  const updateScoreText = () => {
+    const score = Score.getCurrent()
+    if (score !== prevScore) {
+      scoreValue.text = `${score}`
+    }
+    prevScore = score
+  }
+
   return (ctx: CanvasRenderingContext2D, dt: number) => {
     if (!scoreValue.pos.x) {
-      const x = scoreLabel.pos.x + scoreLabel.getTextWidth(ctx) + scoreOffset
+      const scoreLabelRight = scoreLabel.pos.x + scoreLabel.getTextWidth(ctx)
+      const scoreOffset = 6
+      const x = scoreLabelRight + scoreOffset
       scoreValue.pos.setTo(x, 42)
     }
 
+    updateScoreText()
     scoreLabel.draw(ctx, dt)
-    // TODO: update the score
     scoreValue.draw(ctx, dt)
   }
 }
