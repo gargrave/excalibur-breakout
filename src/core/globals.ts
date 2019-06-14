@@ -20,6 +20,13 @@ export const globals = {
     game = _game
   },
 
+  get center() {
+    return {
+      x: game.drawWidth / 2,
+      y: game.drawHeight / 2,
+    }
+  },
+
   set collGroups(_collGroups: KeyedMap) {
     const createCollGroup = cg => ex.CollisionGroupManager.create(cg)
     Object.values(_collGroups).forEach(createCollGroup)
